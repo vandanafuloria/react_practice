@@ -1,12 +1,65 @@
-# React + Vite
+![img](https://www.patterns.dev/img/reactjs/react-logo@3x.svg)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# _React Basics_
 
-Currently, two official plugins are available:
+## _Events Handle in react_
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- In JSX, we can add event handlers by setting attributes like onClick, onMouseOver, etc., and passing a callback function as a prop.
 
-## Expanding the ESLint configuration
+- Event handlers are usually defined inside your components and typically follow a naming convention: they start with handle, followed by the name of the event (e.g., `handleClick, handleMouseOver`).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+`function name`
+
+```javascript
+return <button onClick={handleClick}>Click me</button>;
+```
+
+`Inline function defination`
+
+```javascript
+<button onClick={function handleClick() {
+alert('You clicked me!');
+}}>
+```
+
+`Arrow function`
+
+```javascript
+<button onClick={() => {
+  alert('You clicked me!');
+}}>
+```
+
+`In the event handling, function must be pass not call `
+
+```javascript
+✅
+// passing a function
+<button onClick={handleClick}>
+
+❌
+// calling a function
+<button onClick={handleClick()}>
+
+```
+
+_The difference is subtle. In the first example, the handleClick function is passed as an onClick event handler. This tells React to remember it and only call your function when the user clicks the button._
+
+_In the second example, the () at the end of handleClick() fires the function immediately during rendering, without any clicks. This is because JavaScript inside the JSX { and } executes right away._
+
+## 🔑 When function written inline
+
+```javascript
+✅
+// wrap it in anonymous function
+
+<button onClick={() => alert('You clicked me!')}>
+```
+
+```javascript
+❌
+// This alert fires when the component renders, not when clicked!
+
+<button onClick={alert('You clicked me!')}>
+
+```
